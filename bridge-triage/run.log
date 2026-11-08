@@ -1,0 +1,22 @@
+﻿
+date: 2026-11-08 03:17
+python: Python 3.14.2
+ollama: ollama version is 0.40.15
+requests: 2.34.2
+
+== 1. Unit tests (test_triage.py)
+  normal Low 0
+  drain Critical 9 ['R1_outflow_spike', 'R2_single_tx_drain', 'R3_fresh_recipients']
+  swarm High 6 ['R1_outflow_spike', 'R4_copycat_swarm']
+  mint Critical 9
+  admin Medium 4
+  release Critical 9 ['R7_unmatched_release']
+  ALL OK
+
+== 2. Narration by local models
+  {"model": "gemma4:e4b", "case": "kelp-like release", "level": "Critical", "score": 9, "seconds": 9.0, "mentions_level": true, "numbers_not_in_json": [], "text": "The incident on ExampleBridge is rated Critical. The trigger was identified as R7_unmatched_release. This finding is critical because the system released $290,000,000 while zero was burned. To verify the situation on-chain, the immediate focus must be on the discrepancy between the released and burned amounts."}
+  {"model": "gemma4:e4b", "case": "ronin-like drain", "level": "Critical", "score": 9, "seconds": 7.3, "mentions_level": true, "numbers_not_in_json": [], "text": "The ExampleBridge incident is rated Critical. The trigger was identified by an outflow spike and a single withdrawal that accounted for a significant percentage of the Total Value Locked. This situation is critical because the entire outflow was directed to first-seen addresses. To verify on-chain, analysts must first investigate the nature of the outflow spike and confirm the destination of the funds to these fresh recipients."}
+  {"model": "phi4-mini", "case": "kelp-like release", "level": "Critical", "score": 9, "seconds": 16.3, "mentions_level": false, "numbers_not_in_json": [], "text": "The trigger for this incident is the unmatched release of $290,000,000. This matters because it indicates a significant discrepancy in the expected versus actual released funds. To verify on-chain first, check the transaction history for the release of $290,000,000 and confirm that no corresponding burn occurred."}
+  {"model": "phi4-mini", "case": "ronin-like drain", "level": "Critical", "score": 9, "seconds": 1.5, "mentions_level": false, "numbers_not_in_json": [], "text": "The triggering event is an outflow spike of $5,500,000 compared to the median $102,500. This matters because it indicates a significant deviation from normal activity, raising concerns about potential malicious activity or liquidity issues. The first on-chain verification should focus on the rule \"R1_outflow_spike\" to confirm the magnitude of the outflow. Additionally, examining the rule \"R2_single_tx_drain\" is crucial to understand the impact of a single withdrawal on the Total Value Locked (TVL). Lastly, verifying \"R3_fresh_recipients\" will help determine if the outflow is directed to new addresses, which could signify suspicious behavior."}
+
+Done. Temporary server stopped.

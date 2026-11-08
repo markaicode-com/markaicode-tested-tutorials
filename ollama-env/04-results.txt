@@ -1,0 +1,72 @@
+﻿
+== Date: 2026-11-07 04:51 +08:00
+== ollama version is 0.40.1
+
+== A1. Variables this Ollama version knows (ollama serve --help)
+Start Ollama
+
+Usage:
+  ollama serve [flags]
+
+Aliases:
+  serve, start
+
+Flags:
+  -h, --help   help for serve
+
+Environment Variables:
+      OLLAMA_DEBUG                  Show additional debug information (e.g. OLLAMA_DEBUG=1)
+      OLLAMA_HOST                   IP Address for the ollama server (default 127.0.0.1:11434)
+      OLLAMA_CONTEXT_LENGTH         Context length to use unless otherwise specified (default: 4k/32k/256k based on VRAM)
+      OLLAMA_KEEP_ALIVE             The duration that models stay loaded in memory (default "5m")
+      OLLAMA_MAX_LOADED_MODELS      Maximum number of loaded models per GPU
+      OLLAMA_MAX_TRANSFER_STREAMS   Maximum parallel transfer streams for safetensors model pulls/pushes (default 4)
+      OLLAMA_MAX_QUEUE              Maximum number of queued requests
+      OLLAMA_MODELS                 The path to the models directory
+      OLLAMA_NUM_PARALLEL           Maximum number of parallel requests
+      OLLAMA_NO_CLOUD               Disable Ollama cloud features (remote inference and web search)
+      OLLAMA_NOPRUNE                Do not prune model blobs on startup
+      OLLAMA_ORIGINS                A comma separated list of allowed origins
+      OLLAMA_SCHED_SPREAD           Always schedule model across all GPUs
+      OLLAMA_FLASH_ATTENTION        Enabled flash attention
+      OLLAMA_KV_CACHE_TYPE          Quantization type for the K/V cache (default: f16)
+      OLLAMA_LLM_LIBRARY            Set LLM library to bypass autodetection
+      OLLAMA_GPU_OVERHEAD           Reserve a portion of VRAM per GPU (bytes)
+      OLLAMA_IGPU_ENABLE            Enable integrated GPUs
+      LLAMA_ARG_FIT                 Enable llama.cpp automatic fit of unset memory options (default "on")
+      LLAMA_ARG_FIT_TARGET          Target free VRAM margin per device for llama.cpp fit (MiB)
+      OLLAMA_LOAD_TIMEOUT           How long to allow model loads to stall before giving up (default "5m")
+
+== A2. OLLAMA_* variables currently set on this PC
+User     (none)
+Machine  OLLAMA_FLASH_ATTENTION = 1
+Machine  OLLAMA_KEEP_ALIVE = -1
+Machine  OLLAMA_NUM_GPU = 999
+
+== A3. Which address is Ollama listening on?
+listening on :::11434  (process ollama)
+
+== A4. Where are the models stored, and how big?
+OLLAMA_MODELS not set, default folder used
+C:\Users\<user>\.ollama\models  ->  35.3 GB
+
+== B. Temporary second server on port 11500 with test variables
+OLLAMA_HOST=127.0.0.1:11500  OLLAMA_KEEP_ALIVE=20s  OLLAMA_CONTEXT_LENGTH=16384  OLLAMA_NUM_PARALLEL=2
+server version on :11500 -> 0.40.1
+
+server config line the temporary server printed at start-up:
+time=2026-11-07T04:51:50.727+08:00 level=INFO source=routes.go:2373 msg="server config" env="map[CUDA_VISIBLE_DEVICES: GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: LLAMA_ARG_FIT: LLAMA_ARG_FIT_TARGET: NO_PROXY: OLLAMA_CONTEXT_LENGTH:16384 OLLAMA_CREATE_REMOTE:false OLLAMA_DEBUG:INFO OLLAMA_DEBUG_LOG_REQUESTS:false OLLAMA_EDITOR: OLLAMA_FLASH_ATTENTION:true OLLAMA_GO_TEMPLATE:true OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://127.0.0.1:11500 OLLAMA_IGPU_ENABLE: OLLAMA_KEEP_ALIVE:20s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MAX_TRANSFER_STREAMS:4 OLLAMA_MODELS:C:\\Users\\<user>\\.ollama\\models OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NO_CLOUD:false OLLAMA_NUM_PARALLEL:2 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false OLLAMA_VULKAN:true ROCR_VISIBLE_DEVICES:]"
+time=2026-11-07T04:51:50.754+08:00 level=INFO source=routes.go:2435 msg="Listening on 127.0.0.1:11500 (version 0.40.1)"
+
+== Same model, two servers
+normal server (your settings)      context   8192   unloads in about 9223372037 s   (3,529 MB, 3,529 MB on GPU)
+temporary server (test variables)  context  16384   unloads in about 20 s   (7,201 MB, 6,114 MB on GPU)
+
+waiting 25 s for OLLAMA_KEEP_ALIVE=20s ...
+loaded models on :11500 after 25 s: none (unloaded as configured)
+
+== Is the temporary server reachable only from this PC?
+listening on 127.0.0.1:11500
+
+Temporary server stopped. Your normal Ollama on port 11434 was not changed.
+Done. Leave this window open for the screenshot.

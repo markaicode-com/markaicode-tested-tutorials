@@ -1,0 +1,5 @@
+[x] Renew domain
+[ ] Reply to supplier email
+[ ] Update price list
+[x] Back up laptop
+[ ] Book dentist

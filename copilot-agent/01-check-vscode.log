@@ -1,0 +1,16 @@
+﻿
+date: 2026-11-08 02:06
+windows: Microsoft Windows 11 Pro build 26300
+'code' on PATH points to: C:\Users\<you>\AppData\Local\Programs\cursor\resources\app\codeBin\code.cmd
+vscode path: C:\Users\<you>\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd
+vscode --version:
+  1.145.2
+  c4453f8ea430795f941c1b2ff6c9321135a74a02
+  x64
+copilot / chat extensions:
+node v24.14.1
+npm 11.21.0
+git git version 2.53.0.windows.3
+user settings with chat.* or copilot keys:
+test folder: .\copilot-agent\agent-test
+done

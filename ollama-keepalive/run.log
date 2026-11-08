@@ -1,0 +1,36 @@
+﻿
+date: 2026-11-08 02:37
+ollama: Warning: could not connect to a running Ollama instance Warning: client version is 0.40.1
+gpu: NVIDIA GeForce RTX 2060 SUPER, 8192 MiB
+normal server not running (fine)
+
+== Part 1: temporary server with no OLLAMA_KEEP_ALIVE (Ollama's default)
+  {"step": "start", "ps": [], "gpu_used": "1967 MiB"}
+  {"step": "cold-load phi4-mini (default keep_alive)", "r": {"wall_s": 2.28, "load_s": 2.15, "done_reason": "stop", "response": "Hello there!"}, "ps": [{"name": "phi4-mini:latest", "size_mb": 2945, "vram_mb": 2945, "expires_at": "2026-11-08T02:43:10.6925528+08:00", "seconds_left": 300}], "gpu_used": "5014 MiB"}
+  {"step": "warm request phi4-mini", "r": {"wall_s": 0.07, "load_s": 0.01, "done_reason": "stop", "response": "Hello there!"}, "ps": [{"name": "phi4-mini:latest", "size_mb": 2945, "vram_mb": 2945, "expires_at": "2026-11-08T02:43:10.8789947+08:00", "seconds_left": 300}], "gpu_used": "5014 MiB"}
+  {"step": "after keep_alive 0 (unload)", "ps": [], "gpu_used": "1973 MiB"}
+  {"step": "reload phi4-mini after unload", "r": {"wall_s": 2.23, "load_s": 2.12, "done_reason": "stop", "response": "Hello there!"}, "ps": [{"name": "phi4-mini:latest", "size_mb": 2945, "vram_mb": 2945, "expires_at": "2026-11-08T02:43:15.2371143+08:00", "seconds_left": 300}], "gpu_used": "5020 MiB"}
+  {"step": "keep_alive 30s", "r": {"wall_s": 0.07, "load_s": 0.01, "done_reason": "stop", "response": "Hello there!"}, "ps": [{"name": "phi4-mini:latest", "size_mb": 2945, "vram_mb": 2945, "expires_at": "2026-11-08T02:38:45.3784931+08:00", "seconds_left": 30}], "gpu_used": "5015 MiB"}
+  {"step": "35 s later", "ps": [], "gpu_used": "1966 MiB"}
+  {"step": "keep_alive -1 (pin)", "r": {"wall_s": 2.29, "load_s": 2.16, "done_reason": "stop", "response": "Hello there!"}, "ps": [{"name": "phi4-mini:latest", "size_mb": 2945, "vram_mb": 2945, "expires_at": "2319-02-18T02:26:09.632124307+08:00", "seconds_left": 9223372037}], "gpu_used": "5013 MiB"}
+  {"step": "empty request preloads gemma4:e4b", "r": {"wall_s": 6.07, "done_reason": "load", "load_s": 0.0, "response": ""}, "ps": [{"name": "gemma4:e4b", "size_mb": 245, "vram_mb": 245, "expires_at": "2026-11-08T02:48:58.9077275+08:00", "seconds_left": 600}], "gpu_used": "6569 MiB"}
+  {"step": "load gemma4:26b while phi4-mini is pinned", "r": {"wall_s": 25.23, "load_s": 24.53, "done_reason": "length", "response": ""}, "ps": [{"name": "gemma4:26b", "size_mb": 1237, "vram_mb": 940, "expires_at": "2026-11-08T02:44:24.1820587+08:00", "seconds_left": 300}], "gpu_used": "7571 MiB"}
+  {"step": "request pinned phi4-mini again", "r": {"wall_s": 4.72, "load_s": 4.6, "done_reason": "stop", "response": "Hello there!"}, "ps": [{"name": "phi4-mini:latest", "size_mb": 2945, "vram_mb": 2945, "expires_at": "2026-11-08T02:44:28.958481+08:00", "seconds_left": 300}], "gpu_used": "3981 MiB"}
+
+== ollama ps (CLI view)
+  NAME                ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+  phi4-mini:latest    78fad5d182a7    3.1 GB    100% GPU     4096       llamacpp    4 minutes from now    
+
+== ollama stop gemma4:e4b
+  [?2026h[?25l[1G[K[?25h[?2026l[?25l[2K[1G[?25h
+  NAME                ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+  phi4-mini:latest    78fad5d182a7    3.1 GB    100% GPU     4096       llamacpp    4 minutes from now    
+
+== ollama run --help (keepalive flag)
+        --keepalive string        Duration to keep a model loaded (e.g. 5m)
+
+== Part 2: temporary server with OLLAMA_KEEP_ALIVE=20s
+  {"step": "env-default-request", "r": {"wall_s": 2.29, "load_s": 2.13, "done_reason": "stop", "response": "Hello there!"}, "ps": [{"name": "phi4-mini:latest", "size_mb": 2945, "vram_mb": 2945, "expires_at": "2026-11-08T02:40:01.3872234+08:00", "seconds_left": 20}], "gpu_used": "3987 MiB"}
+  {"step": "env-request-keep_alive-2m", "r": {"wall_s": 0.05, "load_s": 0.01, "done_reason": "stop", "response": "Hello there!"}, "ps": [{"name": "phi4-mini:latest", "size_mb": 2945, "vram_mb": 2945, "expires_at": "2026-11-08T02:41:41.4930675+08:00", "seconds_left": 120}], "gpu_used": "3987 MiB"}
+
+Done. Temporary servers stopped; your normal Ollama on port 11434 was not changed.

@@ -1,0 +1,5 @@
+Create a small Node.js project in this folder with no dependencies:
+1. package.json with a "test" script that runs: node --test
+2. src/formatDate.js that exports formatDate(date) and returns the date as YYYY-MM-DD in local time. It must throw a TypeError for anything that is not a valid Date.
+3. test/formatDate.test.js with three tests using node:test and node:assert: a normal date, a date with a single-digit month and day, and invalid input that throws.
+Then run npm test in the terminal and fix anything that fails.

@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.gguf
+faiss_index/
+node_modules/
+server*.log
+server*.out

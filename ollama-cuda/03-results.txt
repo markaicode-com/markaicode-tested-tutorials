@@ -1,0 +1,57 @@
+﻿
+== Date: 2026-11-07 04:39 +08:00
+
+== nvidia-smi --query-gpu
+name, driver_version, memory.total [MiB], compute_cap
+NVIDIA GeForce RTX 2060 SUPER, 610.88, 8192 MiB, 7.5
+
+== nvidia-smi (header only)
+Sat Nov  7 04:39:36 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.88                 KMD Version: 610.88        CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                  Driver-Model | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 2060 ...  WDDM  |   00000000:01:00.0  On |                  N/A |
+| 34%   40C    P2             45W /  184W |    1500MiB /   8192MiB |     19%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
+== CUDA Toolkit (nvcc) installed?
+no: nvcc is not on PATH
+CUDA_PATH = 
+
+== ollama --version
+ollama version is 0.40.1
+
+== Ollama server log: GPU detection lines
+time=2026-11-07T04:17:13.969+08:00 level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=CUDA compute=7.5 name=CUDA0 description="NVIDIA GeForce RTX 2060 SUPER" libdirs=ollama,cuda_v13 driver=13.3 pci_id=0000:01:00.0 type=discrete total="8.0 GiB" available="7.0 GiB"
+time=2026-11-07T04:27:28.679+08:00 level=INFO source=sched.go:630 msg="gpu memory" id=0 library=CUDA available="6.5 GiB" free="7.0 GiB" minimum="457.0 MiB" overhead="0 B"
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 8191 MiB):
+
+== Speed test (same prompt, temperature 0, 200 tokens max)
+warm-up (GPU)          phi4-mini     105.4 tok/s  load  11.6s  on GPU 100%  (3529 of 3529 MB)  nvidia-smi used: 5113 MiB
+GPU run 1              phi4-mini     107.4 tok/s  load     0s  on GPU 100%  (3529 of 3529 MB)  nvidia-smi used: 5113 MiB
+GPU run 2              phi4-mini     107.2 tok/s  load     0s  on GPU 100%  (3529 of 3529 MB)  nvidia-smi used: 5113 MiB
+GPU run 3              phi4-mini     106.9 tok/s  load     0s  on GPU 100%  (3529 of 3529 MB)  nvidia-smi used: 5113 MiB
+
+== ollama ps while the GPU run is loaded
+NAME                       ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+qwen25-05b-local:latest    a112b6cda4dd    481 MB    100% GPU     4096       llamacpp    Forever               
+phi4-mini:latest           78fad5d182a7    3.7 GB    100% GPU     8192       llamacpp    4 minutes from now    
+CPU only run 1 (num_gpu 0) phi4-mini      22.8 tok/s  load   2.1s  on GPU   0%  (0 of 3541 MB)  nvidia-smi used: 1482 MiB
+CPU only run 2 (num_gpu 0) phi4-mini      22.9 tok/s  load     0s  on GPU   0%  (0 of 3541 MB)  nvidia-smi used: 1482 MiB
+
+== ollama ps while the CPU-only run is loaded
+NAME                       ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+qwen25-05b-local:latest    a112b6cda4dd    481 MB    100% GPU     4096       llamacpp    Forever               
+phi4-mini:latest           78fad5d182a7    3.7 GB    100% CPU     8192       llamacpp    4 minutes from now    
+
+== A model bigger than the 8 GB card: gemma4:26b (partly on GPU, partly on CPU)
+gemma4:26b auto split  gemma4:26b     43.3 tok/s  load  30.1s  on GPU  76%  (944 of 1245 MB)  nvidia-smi used: 7639 MiB
+NAME          ID              SIZE      PROCESSOR          CONTEXT    RUNNER      UNTIL              
+gemma4:26b    001e5dafc3c7    1.3 GB    24%/76% CPU/GPU    8192       llamacpp    4 minutes from now    
+
+Done. Leave this window open for the screenshot.
