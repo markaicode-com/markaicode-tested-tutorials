@@ -40,8 +40,8 @@ Model files are not included; each script names the model it pulls.
 ## Licence
 
 - Code and scripts: [MIT](LICENSE).
-- Run logs and results (`*.log`, `*.txt`, `*.json`, `*.jsonl`) and the sample PDF: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), credit "Markaicode" with a link to the article.
-- The sample document `local-rag/docs/northwind-handbook.pdf` describes a fictional company.
+- Run logs and results (`*.log`, `*.txt`, `*.json`, `*.jsonl`): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), credit "Markaicode" with a link to the article.
+- The RAG test document is a fictional company handbook. Create it by running `python make_pdf.py` inside `local-rag` (needs `fpdf2`); it is written to `docs/northwind-handbook.pdf`.
 
 Not affiliated with Ollama, GitHub, Microsoft, LangChain or any vendor named here. The crypto examples are
 monitoring code, not financial advice.
