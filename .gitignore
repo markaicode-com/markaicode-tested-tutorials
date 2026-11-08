@@ -5,3 +5,4 @@ faiss_index/
 node_modules/
 server*.log
 server*.out
+local-rag/docs/*.pdf
