@@ -1,0 +1,128 @@
+
+date: 2026-11-09 04:04
+ollama: ollama version is 0.40.15
+gpu: NVIDIA GeForce RTX 2060 SUPER, 8192 MiB, 610.88
+
+== Which GPU/CPU settings does 'ollama serve --help' list?
+  Start Ollama
+  
+  Usage:
+    ollama serve [flags]
+  
+  Aliases:
+    serve, start
+  
+  Flags:
+    -h, --help   help for serve
+  
+  Environment Variables:
+        OLLAMA_DEBUG                  Show additional debug information (e.g. OLLAMA_DEBUG=1)
+        OLLAMA_HOST                   IP Address for the ollama server (default 127.0.0.1:11434)
+        OLLAMA_CONTEXT_LENGTH         Context length to use unless otherwise specified (default: 4k/32k/256k based on VRAM)
+        OLLAMA_KEEP_ALIVE             The duration that models stay loaded in memory (default "5m")
+        OLLAMA_MAX_LOADED_MODELS      Maximum number of loaded models per GPU
+        OLLAMA_MAX_TRANSFER_STREAMS   Maximum parallel transfer streams for safetensors model pulls/pushes (default 4)
+        OLLAMA_MAX_QUEUE              Maximum number of queued requests
+        OLLAMA_MODELS                 The path to the models directory
+        OLLAMA_NUM_PARALLEL           Maximum number of parallel requests
+        OLLAMA_NO_CLOUD               Disable Ollama cloud features (remote inference and web search)
+        OLLAMA_NOPRUNE                Do not prune model blobs on startup
+        OLLAMA_ORIGINS                A comma separated list of allowed origins
+        OLLAMA_SCHED_SPREAD           Always schedule model across all GPUs
+        OLLAMA_FLASH_ATTENTION        Enabled flash attention
+        OLLAMA_KV_CACHE_TYPE          Quantization type for the K/V cache (default: f16)
+        OLLAMA_LLM_LIBRARY            Set LLM library to bypass autodetection
+        OLLAMA_GPU_OVERHEAD           Reserve a portion of VRAM per GPU (bytes)
+        OLLAMA_IGPU_ENABLE            Enable integrated GPUs
+        LLAMA_ARG_FIT                 Enable llama.cpp automatic fit of unset memory options (default "on")
+        LLAMA_ARG_FIT_TARGET          Target free VRAM margin per device for llama.cpp fit (MiB)
+        OLLAMA_LOAD_TIMEOUT           How long to allow model loads to stall before giving up (default "5m")
+
+== Does 'ollama run' have a --gpu-layers flag?
+  --gpu-layers in 'ollama run --help': False
+  Run a model
+  
+  Usage:
+    ollama run MODEL [PROMPT] [flags]
+  
+  Examples:
+    ollama run gemma4
+    ollama run gemma4 "Why is the sky blue?"
+    ollama run nimble --ask "Is a refund being requested?" < ticket.txt
+    ollama run nimble --ask "Which team should handle this?" \
+      --choice billing="Payments and refunds" \
+      --choice technical="Software problems" < ticket.txt
+    ollama run nimble --ask "How urgent is this?" \
+      --level "Routine" \
+      --level "Soon" \
+      --level "Immediate" < ticket.txt
+  
+  Flags:
+        --ask string              Ask a decision model a question, answered yes or no unless --choice or --level follow
+        --choice string           Add a label for the preceding --ask to choose from, e.g. billing="Payments and refunds"
+        --dimensions int          Truncate output embeddings to specified dimension (embedding models only)
+        --format string           Response format (e.g. json)
+    -h, --help                    help for run
+        --hidethinking            Hide thinking output (if provided)
+        --insecure                Use an insecure registry
+        --keepalive string        Duration to keep a model loaded (e.g. 5m)
+        --level string            Add a level to score the preceding --ask on, from lowest to highest
+        --nowordwrap              Don't wrap words to the next line automatically
+        --think string[="true"]   Enable thinking mode: true/false or high/medium/low for supported models
+        --truncate                For embedding models: truncate inputs exceeding context length (default: true). Set --truncate=false to error instead
+        --verbose                 Show timings for response
+        --voice string            Voice to speak with (speech models only)
+  
+  Environment Variables:
+        OLLAMA_EDITOR                 Path to editor for interactive prompt editing (Ctrl+G)
+        OLLAMA_HOST                   IP Address for the ollama server (default 127.0.0.1:11434)
+        OLLAMA_NOHISTORY              Do not preserve readline history
+
+== CLI: ollama run phi4-mini --gpu-layers 0 (expect an error if the flag does not exist)
+  Error: unknown flag: --gpu-layers
+
+== A. Normal temporary server: num_gpu default / 0 / partial
+  [phi4-mini] warm-up: tok/s=102.2  eval_count=155  load_s=2.64  size_GB=2.89  vram_GB=2.89
+  [phi4-mini] default (all on GPU): tok/s=101.7  eval_count=135  load_s=0  size_GB=2.89  vram_GB=2.89
+    ollama ps: phi4-mini:latest    78fad5d182a7    3.1 GB    100% GPU     4096       llamacpp    Forever    
+  [phi4-mini] num_gpu=0 (CPU only): tok/s=22.5  eval_count=141  load_s=1.8  size_GB=2.89  vram_GB=0
+    ollama ps: phi4-mini:latest    78fad5d182a7    3.1 GB    100% CPU     4096       llamacpp    Forever    
+  [phi4-mini] num_gpu=12 (part GPU): tok/s=34.4  eval_count=140  load_s=2.12  size_GB=3.4  vram_GB=1.38
+    ollama ps: phi4-mini:latest    78fad5d182a7    3.7 GB    60%/40% CPU/GPU    4096       llamacpp    Forever    
+  [gemma4:e4b] warm-up: tok/s=96.5  eval_count=160  load_s=6.76  size_GB=0.33  vram_GB=0.33
+  [gemma4:e4b] default (all on GPU): tok/s=93.9  eval_count=160  load_s=0  size_GB=0.33  vram_GB=0.33
+    ollama ps: gemma4:e4b    dc35e8d9c606    349 MB    100% GPU     4096       llamacpp    Forever    
+  [gemma4:e4b] num_gpu=0 (CPU only): tok/s=32.9  eval_count=160  load_s=4.64  size_GB=1.8  vram_GB=0
+    ollama ps: gemma4:e4b    dc35e8d9c606    1.9 GB    100% CPU     4096       llamacpp    Forever    
+  [gemma4:e4b] num_gpu=12 (part GPU): tok/s=26.5  eval_count=160  load_s=7.18  size_GB=0.2  vram_GB=0.2
+    ollama ps: gemma4:e4b    dc35e8d9c606    211 MB    100% GPU     4096       llamacpp    Forever    
+
+== B. Temporary server with OLLAMA_GPU_LAYERS=0 (the variable the old article recommends)
+  [phi4-mini] tok/s=97.3  eval_count=155  load_s=2.61  size_GB=2.89  vram_GB=2.89
+    ollama ps: phi4-mini:latest    78fad5d182a7    3.1 GB    100% GPU     4096       llamacpp    Forever    
+
+== C. Temporary server with CUDA_VISIBLE_DEVICES=-1
+  [phi4-mini] tok/s=79.4  eval_count=128  load_s=5.44  size_GB=2.89  vram_GB=2.89
+    ollama ps: phi4-mini:latest    78fad5d182a7    3.1 GB    100% GPU     4096       llamacpp    Forever    
+
+== D. Temporary server started from cmd after: set CUDA_VISIBLE_DEVICES="" (exactly as the old article)
+  [phi4-mini] tok/s=97.8  eval_count=128  load_s=3.71  size_GB=2.89  vram_GB=2.89
+    ollama ps: phi4-mini:latest    78fad5d182a7    3.1 GB    100% GPU     4096       llamacpp    Forever    
+
+== GPU lines from the temporary server logs (inference compute / offload)
+  [srv-a] level=INFO source=routes.go:2474 msg="server config" env="map[CUDA_VISIBLE_DEVICES: GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: LLAMA_ARG_FIT: LLAMA_ARG_FIT_TARGET: NO_PROXY: OLLAMA_CONTEXT_LENGTH:0 OLLAMA_CREATE_REMOTE:false OLLAMA_DEBUG:INFO OLLAMA_DEBUG_LOG_REQUESTS:false OLLAMA_EDITOR: OLLAMA_FLASH_ATTENTION:true OLLAMA_GO_TEMPLATE:true OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://127.0.0.1:11500 OLLAMA_IGPU_ENABLE: OLLAMA_KEEP_ALIVE:2562047h47m16.854775807s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MAX_TRANSFER_STREAMS:4 OLLAMA_MODELS:C:\\Users\\<you>\\.ollama\\models OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NO_CLOUD:false OLLAMA_NUM_PARALLEL:1 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false OLLAMA_VULKAN:true ROCR_VISIBLE_DEVICES:]"
+  [srv-a] level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=CUDA compute=7.5 name=CUDA0 description="NVIDIA GeForce RTX 2060 SUPER" libdirs=ollama,cuda_v13 driver=13.3 pci_id=0000:01:00.0 type=discrete total="8.0 GiB" available="7.0 GiB"
+  [srv-a] load_tensors: offloaded 33/33 layers to GPU
+  [srv-a] load_tensors: offloaded 12/33 layers to GPU
+  [srv-a] load_tensors: offloaded 43/43 layers to GPU
+  [srv-a] load_tensors: offloaded 5/5 layers to GPU
+  [srv-b] level=INFO source=routes.go:2474 msg="server config" env="map[CUDA_VISIBLE_DEVICES: GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: LLAMA_ARG_FIT: LLAMA_ARG_FIT_TARGET: NO_PROXY: OLLAMA_CONTEXT_LENGTH:0 OLLAMA_CREATE_REMOTE:false OLLAMA_DEBUG:INFO OLLAMA_DEBUG_LOG_REQUESTS:false OLLAMA_EDITOR: OLLAMA_FLASH_ATTENTION:true OLLAMA_GO_TEMPLATE:true OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://127.0.0.1:11500 OLLAMA_IGPU_ENABLE: OLLAMA_KEEP_ALIVE:2562047h47m16.854775807s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MAX_TRANSFER_STREAMS:4 OLLAMA_MODELS:C:\\Users\\<you>\\.ollama\\models OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NO_CLOUD:false OLLAMA_NUM_PARALLEL:1 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false OLLAMA_VULKAN:true ROCR_VISIBLE_DEVICES:]"
+  [srv-b] level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=CUDA compute=7.5 name=CUDA0 description="NVIDIA GeForce RTX 2060 SUPER" libdirs=ollama,cuda_v13 driver=13.3 pci_id=0000:01:00.0 type=discrete total="8.0 GiB" available="7.0 GiB"
+  [srv-b] load_tensors: offloaded 33/33 layers to GPU
+  [srv-c] level=INFO source=routes.go:2474 msg="server config" env="map[CUDA_VISIBLE_DEVICES:-1 GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: LLAMA_ARG_FIT: LLAMA_ARG_FIT_TARGET: NO_PROXY: OLLAMA_CONTEXT_LENGTH:0 OLLAMA_CREATE_REMOTE:false OLLAMA_DEBUG:INFO OLLAMA_DEBUG_LOG_REQUESTS:false OLLAMA_EDITOR: OLLAMA_FLASH_ATTENTION:true OLLAMA_GO_TEMPLATE:true OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://127.0.0.1:11500 OLLAMA_IGPU_ENABLE: OLLAMA_KEEP_ALIVE:2562047h47m16.854775807s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MAX_TRANSFER_STREAMS:4 OLLAMA_MODELS:C:\\Users\\<you>\\.ollama\\models OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NO_CLOUD:false OLLAMA_NUM_PARALLEL:1 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false OLLAMA_VULKAN:true ROCR_VISIBLE_DEVICES:]"
+  [srv-c] level=WARN source=runner.go:722 msg="user overrode visible devices" CUDA_VISIBLE_DEVICES=-1
+  [srv-c] level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=Vulkan compute=0.0 name=Vulkan0 description="NVIDIA GeForce RTX 2060 SUPER" libdirs=ollama,vulkan driver=0.0 pci_id=0000:01:00.0 type=discrete total="8.0 GiB" available="7.3 GiB"
+  [srv-c] load_tensors: offloaded 33/33 layers to GPU
+  [srv-d] level=INFO source=routes.go:2474 msg="server config" env="map[CUDA_VISIBLE_DEVICES: GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: LLAMA_ARG_FIT: LLAMA_ARG_FIT_TARGET: NO_PROXY: OLLAMA_CONTEXT_LENGTH:0 OLLAMA_CREATE_REMOTE:false OLLAMA_DEBUG:INFO OLLAMA_DEBUG_LOG_REQUESTS:false OLLAMA_EDITOR: OLLAMA_FLASH_ATTENTION:true OLLAMA_GO_TEMPLATE:true OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://127.0.0.1:11500 OLLAMA_IGPU_ENABLE: OLLAMA_KEEP_ALIVE:2562047h47m16.854775807s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MAX_TRANSFER_STREAMS:4 OLLAMA_MODELS:C:\\Users\\<you>\\.ollama\\models OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NO_CLOUD:false OLLAMA_NUM_PARALLEL:1 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false OLLAMA_VULKAN:true ROCR_VISIBLE_DEVICES:]"
+  [srv-d] level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=Vulkan compute=0.0 name=Vulkan0 description="NVIDIA GeForce RTX 2060 SUPER" libdirs=ollama,vulkan driver=0.0 pci_id=0000:01:00.0 type=discrete total="8.0 GiB" available="7.3 GiB"
+  [srv-d] load_tensors: offloaded 33/33 layers to GPU

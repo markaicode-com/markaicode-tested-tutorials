@@ -1,0 +1,27 @@
+
+date: 2026-11-09 04:06
+Get-Command ollama: %USERPROFILE%\AppData\Local\Programs\Ollama\ollama.exe
+where.exe ollama: %USERPROFILE%\AppData\Local\Programs\Ollama\ollama.exe
+default install folder %LOCALAPPDATA%\Programs\Ollama exists: True
+ollama.exe in it: True
+Ollama folder in the USER PATH (registry): True; in the MACHINE PATH: False
+entries: user PATH 21, machine PATH 14, this session's PATH 35
+characters: user PATH 1034, machine PATH 458, session PATH 1493
+the old one-liner would write a USER PATH of 1538 characters with 36 entries (it copies the machine PATH into the user PATH)
+
+== Demo in a child PowerShell with the Ollama folder removed from PATH
+  At line:4 char:13
+  + $env:PATH += ;$env:LOCALAPPDATA\Programs\Ollama
+  +             ~
+  You must provide a value expression following the '+=' operator.
+  At line:4 char:32
+  + $env:PATH += ;$env:LOCALAPPDATA\Programs\Ollama
+  +                                ~~~~~~~~~~~~~~~~
+  Unexpected token '\Programs\Ollama' in expression or statement.
+      + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+      + FullyQualifiedErrorId : ExpectedValueExpression
+   
+
+== Same demo in cmd.exe
+  'ollama' is not recognized as an internal or external command,
+  operable program or batch file.

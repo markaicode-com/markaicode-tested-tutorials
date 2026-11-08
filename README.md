@@ -18,6 +18,9 @@ numbers from these runs. If a step stops working for you, the run log here shows
 | [local-rag](local-rag/) | [Local RAG with Ollama and LangChain 1.x](https://markaicode.com/build-local-rag-pipeline-ollama-langchain/) | Ingest, answers checked against a known document, old imports that fail | 2026-11-08 |
 | [copilot-agent](copilot-agent/) | [GitHub Copilot agent mode in VS Code](https://markaicode.com/vs/enable-github-copilot-agent-mode-in-vs-code-in-5-minutes/) | The task given to the agent and the test project it worked on | 2026-11-08 |
 | [bridge-triage](bridge-triage/) | [Cross-chain bridge monitoring with Ollama](https://markaicode.com/cross-chain-bridge-analysis-ollama-multi-blockchain-tracking/) | Alert rules with unit tests, and how two local models narrate an alert | 2026-11-08 |
+| [ollama-cpu-gpu](ollama-cpu-gpu/) | [Force Ollama onto the CPU or GPU](https://markaicode.com/switch-cpu-gpu-inference-ollama/) | Each way to force the CPU, which ones still ran on the GPU (Vulkan fallback), partial offload | 2026-11-09 |
+| [ollama-path](ollama-path/) | [Fix 'ollama: command not found'](https://markaicode.com/fix-ollama-command-not-found-path-configuration/) | Where Windows installs Ollama, user vs machine PATH, the exact errors and the fix | 2026-11-09 |
+| [ollama-cache](ollama-cache/) | [Clear the Ollama model cache](https://markaicode.com/clear-ollama-model-cache-storage-guide/) | Models folder size, `ollama prune` (does not exist), what `cp` and `rm` free | 2026-11-09 |
 
 ## How the runs work
 

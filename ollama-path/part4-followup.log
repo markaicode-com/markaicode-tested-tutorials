@@ -1,0 +1,24 @@
+
+date: 2026-11-09 04:08
+== PATH demo in a child PowerShell (Ollama folder removed from PATH)
+  ERROR: The term 'ollama' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+  -- after: $env:PATH += ";$env:LOCALAPPDATA\Programs\Ollama"
+  ollama version is 0.40.15
+
+== E. CUDA_VISIBLE_DEVICES=-1 and GGML_VK_VISIBLE_DEVICES=-1 (hide CUDA and Vulkan)
+  [phi4-mini] tok/s=22.1
+
+== F. OLLAMA_LLM_LIBRARY=cpu
+  [phi4-mini] tok/s=22.3
+
+== G. Modelfile with PARAMETER num_gpu 0
+  success 
+  [phi4-cpu-test] tok/s=21.7
+  
+
+== GPU lines from the temporary server logs
+  [srv-e] level=INFO source=types.go:50 msg="inference compute" id=cpu library=cpu compute="" name=cpu description=cpu libdirs=ollama driver="" pci_id="" type="" total="31.1 GiB" available="9.8 GiB"
+  [srv-f] level=INFO source=types.go:50 msg="inference compute" id=cpu library=cpu compute="" name=cpu description=cpu libdirs=ollama driver="" pci_id="" type="" total="31.1 GiB" available="9.8 GiB"
+  [srv-g] level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=CUDA compute=7.5 name=CUDA0 description="NVIDIA GeForce RTX 2060 SUPER" libdirs=ollama,cuda_v13 driver=13.3 pci_id=0000:01:00.0 type=discrete total="8.0 GiB" available="7.0 GiB"
+
+Done. Temporary server stopped; test model removed.
