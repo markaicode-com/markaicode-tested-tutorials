@@ -21,6 +21,7 @@ numbers from these runs. If a step stops working for you, the run log here shows
 | [ollama-cpu-gpu](ollama-cpu-gpu/) | [Force Ollama onto the CPU or GPU](https://markaicode.com/switch-cpu-gpu-inference-ollama/) | Each way to force the CPU, which ones still ran on the GPU (Vulkan fallback), partial offload | 2026-11-09 |
 | [ollama-path](ollama-path/) | [Fix 'ollama: command not found'](https://markaicode.com/fix-ollama-command-not-found-path-configuration/) | Where Windows installs Ollama, user vs machine PATH, the exact errors and the fix | 2026-11-09 |
 | [ollama-cache](ollama-cache/) | [Clear the Ollama model cache](https://markaicode.com/clear-ollama-model-cache-storage-guide/) | Models folder size, `ollama prune` (does not exist), what `cp` and `rm` free | 2026-11-09 |
+| [ollama-curl-api](ollama-curl-api/) | [Curl commands for the Ollama API](https://markaicode.com/curl-commands-ollama-api-testing-tutorial/) | Every API call with real responses, error codes, the PowerShell `curl` alias and quoting problems | 2026-11-10 |
 
 ## How the runs work
 
