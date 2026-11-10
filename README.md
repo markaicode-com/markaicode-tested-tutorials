@@ -22,6 +22,7 @@ numbers from these runs. If a step stops working for you, the run log here shows
 | [ollama-path](ollama-path/) | [Fix 'ollama: command not found'](https://markaicode.com/fix-ollama-command-not-found-path-configuration/) | Where Windows installs Ollama, user vs machine PATH, the exact errors and the fix | 2026-11-09 |
 | [ollama-cache](ollama-cache/) | [Clear the Ollama model cache](https://markaicode.com/clear-ollama-model-cache-storage-guide/) | Models folder size, `ollama prune` (does not exist), what `cp` and `rm` free | 2026-11-09 |
 | [ollama-curl-api](ollama-curl-api/) | [Curl commands for the Ollama API](https://markaicode.com/curl-commands-ollama-api-testing-tutorial/) | Every API call with real responses, error codes, the PowerShell `curl` alias and quoting problems | 2026-11-10 |
+| [lmstudio-gpu](lmstudio-gpu/) | [LM Studio GPU not detected](https://markaicode.com/errors/lm-studio-gpu-not-detected-fix/) | `lms runtime survey` and `lms runtime ls` on LM Studio 0.4.28 with an RTX 2060 SUPER, the PATH problem, and what `--estimate-only` shows | 2026-11-11 |
 
 ## How the runs work
 

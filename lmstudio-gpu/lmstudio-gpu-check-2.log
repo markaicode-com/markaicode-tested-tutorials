@@ -1,0 +1,77 @@
+﻿
+=== run 2026-11-11 04:17:53 +08:00
+
+=== 1. LM Studio app version
+LM Studio.exe product version: 0.4.28.0 | install: per-user
+lms on PATH: False
+
+=== 2. Runtime commands this build offers
+Usage: lms runtime [options] [command]
+
+Manage and update the inference runtime
+
+Commands:
+   ls                List installed LLM engines
+   select            Select installed LLM engines
+   remove            Remove installed runtime extension packs
+   update            Update installed runtime extensions.
+   get               Download or list runtime extensions.
+   survey            Survey hardware available to selected runtime engines
+
+=== 3. Runtime GPU survey (if supported)
+Survey by llama.cpp-win-x86_64-nvidia-cuda12-avx2 (2.72.0)
+GPU/ACCELERATORS                                 VRAM    
+NVIDIA GeForce RTX 2060 SUPER (CUDA, Discrete)   8.00 GiB
+
+CPU: x86_64 (AVX, AVX2)
+RAM: 31.11 GiB
+
+=== 4. Selected runtime
+LLM ENGINE                                        SELECTED    MODEL FORMAT
+llama.cpp-win-x86_64-avx2@2.67.0                                  GGUF    
+llama.cpp-win-x86_64-nvidia-cuda-avx2@2.67.0                      GGUF    
+llama.cpp-win-x86_64-nvidia-cuda12-avx2@2.72.0       ✓            GGUF    
+llama.cpp-win-x86_64-vulkan-avx2@2.67.0                           GGUF
+
+=== 5. The model on disk: size and type only
+type: embedding | format: gguf | params:  | arch: nomic-bert | size GB: 0.08
+
+=== 6. Memory estimates, no load (default context, then 16384 tokens)
+--- --gpu max
+Model: (name withheld)
+GPU Offload: 100%
+Estimated GPU Memory:   112.29 MiB
+Estimated Total Memory: 112.29 MiB
+Confidence: LOW
+System.Management.Automation.RemoteException
+Estimate: This model may be loaded based on your resource guardrails settings.
+--- --gpu 0.5
+Model: (name withheld)
+GPU Offload: 50%
+Estimated GPU Memory:   112.29 MiB
+Estimated Total Memory: 112.29 MiB
+Confidence: LOW
+System.Management.Automation.RemoteException
+Estimate: This model may be loaded based on your resource guardrails settings.
+--- --gpu off
+Model: (name withheld)
+GPU Offload: 0%
+Estimated GPU Memory:   112.29 MiB
+Estimated Total Memory: 112.29 MiB
+Confidence: LOW
+System.Management.Automation.RemoteException
+Estimate: This model may be loaded based on your resource guardrails settings.
+--- --gpu max --context-length 16384
+Model: (name withheld)
+Context Length: 16,384
+GPU Offload: 100%
+Estimated GPU Memory:   112.29 MiB
+Estimated Total Memory: 112.29 MiB
+Confidence: LOW
+System.Management.Automation.RemoteException
+Estimate: This model may be loaded based on your resource guardrails settings.
+
+=== 7. Windows per-app GPU preference for LM Studio (read only)
+no per-app GPU preference set for LM Studio (Windows default)
+
+=== done
