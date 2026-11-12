@@ -23,6 +23,7 @@ numbers from these runs. If a step stops working for you, the run log here shows
 | [ollama-cache](ollama-cache/) | [Clear the Ollama model cache](https://markaicode.com/clear-ollama-model-cache-storage-guide/) | Models folder size, `ollama prune` (does not exist), what `cp` and `rm` free | 2026-11-09 |
 | [ollama-curl-api](ollama-curl-api/) | [Curl commands for the Ollama API](https://markaicode.com/curl-commands-ollama-api-testing-tutorial/) | Every API call with real responses, error codes, the PowerShell `curl` alias and quoting problems | 2026-11-10 |
 | [lmstudio-gpu](lmstudio-gpu/) | [LM Studio GPU not detected](https://markaicode.com/errors/lm-studio-gpu-not-detected-fix/) | `lms runtime survey` and `lms runtime ls` on LM Studio 0.4.28 with an RTX 2060 SUPER, the PATH problem, and what `--estimate-only` shows | 2026-11-11 |
+| [lmstudio-download](lmstudio-download/) | [LM Studio model download failed](https://markaicode.com/errors/lm-studio-model-download-failed-fix/) | Where 0.4.28 keeps models, the `useHFProxy` setting, which Hugging Face hosts a download really uses, and `lms get` / `lms import` | 2026-11-12 |
 
 ## How the runs work
 

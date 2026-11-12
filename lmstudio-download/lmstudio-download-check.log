@@ -1,0 +1,86 @@
+﻿
+=== run 2026-11-12 04:04:48 +08:00
+LM Studio.exe version: 0.4.28.0
+
+=== 1. Download and import commands in this build
+Usage: lms get [options] [name]
+
+Search and download local models or Hub artifacts
+
+Arguments:
+   name                 The model or Hub artifact to download, for example
+                        "openai/gpt-oss-20b" or "owner/my-skill". For a specific model
+                        quantization, append its name with "@", for example
+                        "qwen/qwen3.5-9b@q8_0". To download a model from Hugging Face
+                        directly, use its full URL.
+
+Options:
+   --mlx                Restrict model resolution to MLX-compatible options. If any of
+                        "--mlx" or "--gguf" is specified, only matching formats will be
+                        considered. Otherwise only options supported by your system will
+                        be considered.
+   --gguf               Restrict model resolution to GGUF-compatible options. If any of
+                        "--mlx" or "--gguf" is specified, only matching formats will be
+                        considered. Otherwise only options supported by your system will
+                        be considered.
+   -y, --yes            Automatically approve all prompts. Useful for scripting. If there
+                        are multiple staff picks matching the search term, the first one
+                        will be used. If there are multiple download options, the
+                        preselected option based on your hardware and preferences will be
+                        used.
+   --select             Open variant selection before downloading. Useful if the default
+                        variant is already downloaded and you want to choose a different
+                        one.
+--- lms import --help
+Usage: lms import [options] <file-path>
+
+Import a model file into LM Studio
+
+Arguments:
+   file-path                          Path to the model file to import
+
+Options:
+   -y, --yes                          Automatically approve all prompts. Will also attempt
+                                      to automatically resolve the user and repository
+                                      from the file name.
+   --user-repo <user/repo>            Manually provide the user and repository in the
+                                      format "user/repo". Specifying this will skip
+                                      prompts about how to categorize the model file.
+   -c, --copy                         Copy the file instead of moving it. This is useful
+                                      when you want to keep the original file in place.
+   -L, --hard-link                    Create a hard link instead of moving or copying the
+                                      file. This is useful when you want to keep the
+                                      original file in place.
+   -l, --symbolic-link                Create a symbolic link instead of moving or copying
+                                      the file. This is useful when you want to keep the
+                                      original file in place.
+   --dry-run                          Do not actually perform the import, just show what
+                                      would be done.
+
+=== 2. Where models live (counts and size only)
+%USERPROFILE%\.lmstudio\models : exists | model files: 0 | total GB: 0
+%USERPROFILE%\.cache\lm-studio\models : not found
+
+=== 3. Settings that mention proxy, Hugging Face, downloads or the models folder (keys and values)
+file: %USERPROFILE%\.lmstudio\settings.json
+  downloadsFolder = "%USERPROFILE%\\.lmstudio\\models"
+  useHFProxy = true
+  hfSearchToken = ""
+  hfDownloadToken = ""
+not found: %USERPROFILE%\.lmstudio\.internal\app-settings.json
+proxy key found in: %USERPROFILE%\.lmstudio\settings.json -> "useHFProxy": true,
+
+=== 4. Free space on the models drive
+drive C: free GB 136.1
+
+=== 5. Can this PC reach Hugging Face? (HEAD requests only, nothing downloaded)
+API: HTTP 200 in 0.294101s
+file URL: HTTP 302 | redirects to host: us.aws.cdn.hf.co
+follow redirects: final HTTP 200 | redirects 1 | 0.371721s | final host us.aws.cdn.hf.co
+DNS huggingface.co -> resolves (A record)
+DNS cdn-lfs.huggingface.co -> resolves (CNAME only)
+DNS cdn-lfs-us-1.hf.co -> resolves (A record)
+DNS cas-bridge.xethub.hf.co -> resolves (A record)
+DNS lmstudio.ai -> resolves (A record)
+
+=== done
