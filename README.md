@@ -25,6 +25,7 @@ numbers from these runs. If a step stops working for you, the run log here shows
 | [lmstudio-gpu](lmstudio-gpu/) | [LM Studio GPU not detected](https://markaicode.com/errors/lm-studio-gpu-not-detected-fix/) | `lms runtime survey` and `lms runtime ls` on LM Studio 0.4.28 with an RTX 2060 SUPER, the PATH problem, and what `--estimate-only` shows | 2026-11-11 |
 | [lmstudio-download](lmstudio-download/) | [LM Studio model download failed](https://markaicode.com/errors/lm-studio-model-download-failed-fix/) | Where 0.4.28 keeps models, the `useHFProxy` setting, which Hugging Face hosts a download really uses, and `lms get` / `lms import` | 2026-11-12 |
 | [ollama-vulkan](ollama-vulkan/) | [Intel Arc GPU + Ollama (Vulkan)](https://markaicode.com/intel-arc-gpu-ollama-openvino-tutorial/) | Ollama on Vulkan vs CUDA vs CPU, the OLLAMA_IGPU_ENABLE switch, and how Ollama picked a slower iGPU over an RTX card | 2026-11-14 |
+| [thirdweb-token-gating](thirdweb-token-gating/) | [Token gating a website with thirdweb v5](https://markaicode.com/token-gating-website-thirdweb-sdk-v4/) | Next.js 16 build (and the @x402 error), the wallet-login JWT round trip, and how /gated handles no cookie, a garbled cookie and an unreachable chain. Run in a Linux container, not the PC above; the "holder sees content" path was not tested | 2026-11-14 |
 
 ## How the runs work
 

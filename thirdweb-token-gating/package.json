@@ -1,0 +1,25 @@
+{
+  "name": "thirdweb-token-gating",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "thirdweb": "5.122.1",
+    "@x402/core": "2.31.0",
+    "@x402/evm": "2.31.0",
+    "@x402/svm": "2.31.0",
+    "@x402/extensions": "2.31.0"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/node": "^22"
+  }
+}
