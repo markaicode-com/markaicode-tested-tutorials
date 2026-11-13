@@ -1,0 +1,10 @@
+PASS-read 1 fresh price (age 0s) price 300000000000 expo -8
+PASS-read 2a same price ~59s later price 300000000000 expo -8
+REVERT 2b same price ~62s later -> StalePrice
+INFO 3 posting an OLDER update succeeded (tx ok); stored price now 300000000000
+REVERT 3 after older update -> StalePrice
+REVERT 4 conf 2% of price -> PriceTooUncertain
+REVERT 5 negative price -> NonPositivePrice
+REVERT 6 publishTime 120s in the future -> StalePrice
+REVERT 7 update with 0 fee -> InsufficientFee
+INFO 8 getUpdateFee for 1 update = 1 wei

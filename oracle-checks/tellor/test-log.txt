@@ -1,0 +1,10 @@
+PASS 1 valid: report 13h old, attested now, 3 of 3 signed -> stored price 3000.0
+REVERT 2 replay the same attestation -> NotNewerThanStored
+REVERT 3 one signature from a key outside the validator set -> InvalidSignature
+REVERT 4 only 1 of 3 validators signed (100 < 200 power) -> InsufficientVotingPower
+PASS 5 2 of 3 validators signed (200 power) (would be accepted)
+REVERT 6 attestation 11 minutes old -> AttestationTooOld
+REVERT 7 report only 1 hour old (inside dispute window) -> ReportTooRecent
+REVERT 8 wrong query id (BTC/USD) -> WrongQueryId
+REVERT 9 timestamps in SECONDS by mistake -> AttestationTooOld
+REVERT 10 low reporter power (aggregatePower 50) -> NotEnoughReporterPower

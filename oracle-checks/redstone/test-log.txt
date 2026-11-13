@@ -1,0 +1,9 @@
+PASS 1 three authorised signers, fresh, 3000/3001/3002 -> 3001.0
+REVERT 2 only two signers -> InsufficientNumberOfUniqueSigners(2, 3)
+REVERT 3 two authorised + one unknown signer (index 7) -> SignerNotAuthorised(0x14dC79964da2C08b23698B3D3cc7Ca32193d9955)
+REVERT 4 same signer three times -> InsufficientNumberOfUniqueSigners(1, 3)
+REVERT 5 data 4 minutes old -> TimestampIsTooOld(1794603100, 1794603340)
+REVERT 6 data 2 minutes in the future -> TimestampFromTooLongFuture(1794603460, 1794603340)
+PASS 7 one signer reports 9999 (manipulated) -> 3001.0
+REVERT 8 different timestamps between packages -> TimestampsMustBeEqual()
+REVERT 9 plain call without a RedStone payload -> CalldataMustHaveValidPayload

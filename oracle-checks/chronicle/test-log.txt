@@ -1,0 +1,4 @@
+REVERT 1 reader not whitelisted yet -> NotTolled
+PASS 2 after kiss(reader), fresh value -> 3000.0
+REVERT 3 value last updated 2 hours ago -> StaleChroniclePrice
+REVERT 4 oracle has no value -> OracleHasNoValue

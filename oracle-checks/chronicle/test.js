@@ -1,0 +1,20 @@
+const ganache=require('ganache'),{ethers}=require('ethers'),b=require('./build.json');
+const log=[];const L=(...a)=>{const s=a.join(' ');log.push(s);console.log(s)};
+(async()=>{
+ const provider=new ethers.BrowserProvider(ganache.provider({logging:{quiet:true},chain:{hardfork:'shanghai'},wallet:{totalAccounts:1}}));
+ const s=await provider.getSigner();
+ const mock=await (await new ethers.ContractFactory(b.mock.abi,b.mock.evm.bytecode.object,s).deploy()).waitForDeployment();
+ const reader=await (await new ethers.ContractFactory(b.reader.abi,b.reader.evm.bytecode.object,s).deploy(await mock.getAddress())).waitForDeployment();
+ const ALL=new ethers.Interface([...b.reader.abi,...b.mock.abi].filter(x=>x.type==='error').concat(['error NotTolled(address caller)']));
+ const now=async()=>BigInt((await provider.getBlock('latest')).timestamp);
+ const r=async(label)=>{try{const v=await reader.price();L('PASS',label,'->',ethers.formatUnits(v,18))}catch(e){let n;try{const p=ALL.parseError(e.data);n=p.name}catch{n=(e.shortMessage||e.message).slice(0,80)}L('REVERT',label,'->',n)}};
+ await (await mock.set(3000n*10n**18n,await now())).wait();
+ await r('1 reader not whitelisted yet');
+ await (await mock.kiss(await reader.getAddress())).wait();
+ await r('2 after kiss(reader), fresh value');
+ await (await mock.set(3000n*10n**18n,(await now())-7200n)).wait();
+ await r('3 value last updated 2 hours ago');
+ await (await mock.set(0n,0n)).wait();
+ await r('4 oracle has no value');
+ require('fs').writeFileSync('test-log.txt',log.join('\n')+'\n');
+})().catch(e=>{console.error(e);process.exit(1)});

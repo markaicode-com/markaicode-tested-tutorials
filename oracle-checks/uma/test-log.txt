@@ -1,0 +1,10 @@
+INFO final fee 50 BOND, burnedBondPercentage 0.5 -> minimum bond 100.0 BOND; default liveness 7200 s
+INFO A asserter balance before 1000.0
+REVERT A read result right away -> Assertion not settled
+REVERT A settle after 0s -> Assertion not expired
+PASS A no dispute, settled after 2h -> true | asserter balance 1000.0
+INFO B after dispute, pending DVM requests: 1
+REVERT B settle before the DVM answers -> require(false)
+PASS B disputed, DVM says false -> false | asserter 900.0 | disputer 1050.0 | store got 50.0
+PASS C disputed, DVM says true -> true | asserter 950.0 | disputer 950.0
+REVERT D dispute after 2h -> Assertion is expired

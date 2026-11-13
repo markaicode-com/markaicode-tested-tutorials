@@ -1,0 +1,14 @@
+{
+  "name": "oracle-check-tellor",
+  "private": true,
+  "scripts": {
+    "compile": "node compile.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "ethers": "6.17.0",
+    "ganache": "7.9.2",
+    "solc": "0.8.19",
+    "usingtellorlayer": "1.3.0"
+  }
+}

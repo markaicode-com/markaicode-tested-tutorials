@@ -1,0 +1,12 @@
+{
+  "name": "oracle-check-band-api3",
+  "private": true,
+  "scripts": {
+    "compile": "node compile.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "@api3/contracts": "43.0.0",
+    "solc": "0.8.30"
+  }
+}

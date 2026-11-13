@@ -1,0 +1,14 @@
+{
+  "name": "oracle-check-pyth",
+  "private": true,
+  "scripts": {
+    "compile": "node compile.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "@pythnetwork/pyth-sdk-solidity": "4.3.1",
+    "ethers": "6.17.0",
+    "ganache": "7.9.2",
+    "solc": "0.8.30"
+  }
+}
