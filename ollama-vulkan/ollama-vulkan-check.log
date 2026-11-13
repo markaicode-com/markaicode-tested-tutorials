@@ -1,0 +1,64 @@
+﻿
+=== run 2026-11-13 08:48:26 +08:00
+ollama: Warning: could not connect to a running Ollama instance
+Warning: client version is 0.40.15
+GPU backends shipped (folders in lib\ollama): cuda_v12, cuda_v13, rocm_v7_1, vulkan
+display adapter: NVIDIA GeForce RTX 2060 SUPER | driver 32.0.16.1088
+display adapter: AMD Radeon 780M Graphics | driver 32.0.21030.2001
+vulkaninfo: apiVersion         = 1.4.341
+vulkaninfo: deviceName         = NVIDIA GeForce RTX 2060 SUPER
+vulkaninfo: driverName         = NVIDIA
+vulkaninfo: apiVersion         = 1.4.315
+vulkaninfo: deviceName         = Radeon 7
+vulkaninfo: driverName         = AMD proprietary driver
+
+=== A default (CUDA available)
+settings: 
+result: 140 tokens | 98.2 tok/s | load 2.6 s | wall 4.2 s | in GPU memory: 100% of 2.89 GB
+server log lines kept: 8
+  time=2026-11-13T08:48:30.987+08:00 level=INFO source=runner.go:405 msg="dropping integrated GPU; to enable, set OLLAMA_IGPU_ENABLE=1" id=1 library=Vulkan compute=0.0 name=Vulkan1 description="Radeon 7" pci_id=""
+  time=2026-11-13T08:48:31.627+08:00 level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=CUDA compute=7.5 name=CUDA0 description="NVIDIA GeForce RTX 2060 SUPER" libdirs=ollama,cuda_v13 driver=13.3 pci_id=0000:01:00.0 type=discrete total="8.0 GiB" available="7.0 GiB"
+  time=2026-11-13T08:48:32.251+08:00 level=INFO source=sched.go:658 msg="gpu memory" id=0 library=CUDA available="6.5 GiB" free="7.0 GiB" minimum="457.0 MiB" overhead="0 B"
+  time=2026-11-13T08:48:32.252+08:00 level=INFO source=llama_server.go:1406 msg="waiting for llama-server to become available" status="llm server error"
+  load_tensors: offloading output layer to GPU
+  load_tensors: offloading 31 repeating layers to GPU
+  load_tensors: offloaded 33/33 layers to GPU
+  llama_kv_cache: size =  512.00 MiB (  4096 cells,  32 layers,  1/1 seqs), K (f16):  256.00 MiB, V (f16):  256.00 MiB
+
+=== B Vulkan only (CUDA and ROCm hidden)
+settings: CUDA_VISIBLE_DEVICES=-1 HIP_VISIBLE_DEVICES=-1
+result: 140 tokens | 101.6 tok/s | load 3.6 s | wall 5.1 s | in GPU memory: 100% of 2.89 GB
+server log lines kept: 14
+  time=2026-11-13T08:48:39.850+08:00 level=INFO source=runner.go:405 msg="dropping integrated GPU; to enable, set OLLAMA_IGPU_ENABLE=1" id=1 library=Vulkan compute=0.0 name=Vulkan1 description="Radeon 7" pci_id=""
+  time=2026-11-13T08:48:39.850+08:00 level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=Vulkan compute=0.0 name=Vulkan0 description="NVIDIA GeForce RTX 2060 SUPER" libdirs=ollama,vulkan driver=0.0 pci_id=0000:01:00.0 type=discrete total="8.0 GiB" available="7.3 GiB"
+  time=2026-11-13T08:48:40.488+08:00 level=INFO source=sched.go:658 msg="gpu memory" id=0 library=Vulkan available="6.8 GiB" free="7.3 GiB" minimum="457.0 MiB" overhead="0 B"
+  time=2026-11-13T08:48:40.489+08:00 level=INFO source=llama_server.go:1406 msg="waiting for llama-server to become available" status="llm server error"
+  cmn  common_param:   - Vulkan0 : NVIDIA GeForce RTX 2060 SUPER (8220 MiB, 7448 MiB free)
+  common_memory_breakdown_print: |   - Vulkan0 (RTX 2060 SUPER) |  8220 = 7446 + (2956 =  2368 +     512 +      76) +       -2183 |
+  llama_prepare_model_devices: using device Vulkan0 (NVIDIA GeForce RTX 2060 SUPER) (0000:01:00.0) - 7446 MiB free
+  load_tensors: offloading output layer to GPU
+  load_tensors: offloading 31 repeating layers to GPU
+  load_tensors: offloaded 33/33 layers to GPU
+  load_tensors:      Vulkan0 model buffer size =  2368.57 MiB
+  llama_kv_cache:    Vulkan0 KV buffer size =   512.00 MiB
+  llama_kv_cache: size =  512.00 MiB (  4096 cells,  32 layers,  1/1 seqs), K (f16):  256.00 MiB, V (f16):  256.00 MiB
+  sched_reserve:    Vulkan0 compute buffer size =    76.01 MiB
+
+=== C Vulkan, integrated GPU only (Vulkan1)
+settings: CUDA_VISIBLE_DEVICES=-1 GGML_VK_VISIBLE_DEVICES=1 HIP_VISIBLE_DEVICES=-1
+result: 133 tokens | 23.4 tok/s | load 1.5 s | wall 7.3 s | in GPU memory: 0% of 2.89 GB
+server log lines kept: 4
+  time=2026-11-13T08:48:48.769+08:00 level=INFO source=runner.go:405 msg="dropping integrated GPU; to enable, set OLLAMA_IGPU_ENABLE=1" id=0 library=Vulkan compute=0.0 name=Vulkan0 description="Radeon 7" pci_id=""
+  time=2026-11-13T08:48:48.769+08:00 level=INFO source=types.go:50 msg="inference compute" id=cpu library=cpu compute="" name=cpu description=cpu libdirs=ollama driver="" pci_id="" type="" total="31.1 GiB" available="14.8 GiB"
+  time=2026-11-13T08:48:48.818+08:00 level=INFO source=llama_server.go:1406 msg="waiting for llama-server to become available" status="llm server error"
+  llama_kv_cache: size =  512.00 MiB (  4096 cells,  32 layers,  1/1 seqs), K (f16):  256.00 MiB, V (f16):  256.00 MiB
+
+=== D CPU only (Vulkan off, CUDA and ROCm hidden)
+settings: CUDA_VISIBLE_DEVICES=-1 HIP_VISIBLE_DEVICES=-1 OLLAMA_VULKAN=0
+result: 133 tokens | 22.5 tok/s | load 1.5 s | wall 7.6 s | in GPU memory: 0% of 2.89 GB
+server log lines kept: 3
+  time=2026-11-13T08:48:59.199+08:00 level=INFO source=types.go:50 msg="inference compute" id=cpu library=cpu compute="" name=cpu description=cpu libdirs=ollama driver="" pci_id="" type="" total="31.1 GiB" available="14.9 GiB"
+  time=2026-11-13T08:48:59.311+08:00 level=INFO source=llama_server.go:1406 msg="waiting for llama-server to become available" status="llm server error"
+  llama_kv_cache: size =  512.00 MiB (  4096 cells,  32 layers,  1/1 seqs), K (f16):  256.00 MiB, V (f16):  256.00 MiB
+
+=== done

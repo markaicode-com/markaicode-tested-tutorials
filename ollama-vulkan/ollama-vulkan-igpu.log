@@ -1,0 +1,54 @@
+﻿
+=== run 2026-11-14 03:11:08 +08:00
+ollama: Warning: could not connect to a running Ollama instance
+Warning: client version is 0.40.15
+GPU backends shipped (folders in lib\ollama): cuda_v12, cuda_v13, rocm_v7_1, vulkan
+display adapter: NVIDIA GeForce RTX 2060 SUPER | driver 32.0.16.1088
+display adapter: AMD Radeon 780M Graphics | driver 32.0.21030.2001
+vulkaninfo: apiVersion         = 1.4.341
+vulkaninfo: deviceName         = NVIDIA GeForce RTX 2060 SUPER
+vulkaninfo: driverName         = NVIDIA
+vulkaninfo: apiVersion         = 1.4.315
+vulkaninfo: deviceName         = Radeon 7
+vulkaninfo: driverName         = AMD proprietary driver
+
+=== E Vulkan, integrated GPU only, OLLAMA_IGPU_ENABLE=1
+settings: CUDA_VISIBLE_DEVICES=-1 GGML_VK_VISIBLE_DEVICES=1 HIP_VISIBLE_DEVICES=-1 OLLAMA_IGPU_ENABLE=1
+result: 140 tokens | 21.2 tok/s | load 5.8 s | wall 13.6 s | in GPU memory: 100% of 2.89 GB
+server log lines kept: 13
+  time=2026-11-14T03:11:11.545+08:00 level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=1 library=Vulkan compute=0.0 name=Vulkan0 description="Radeon 7" libdirs=ollama,vulkan driver=0.0 pci_id="" type=iGPU total="15.8 GiB" available="15.0 GiB"
+  time=2026-11-14T03:11:12.322+08:00 level=INFO source=sched.go:658 msg="gpu memory" id=0 library=Vulkan available="14.6 GiB" free="15.0 GiB" minimum="457.0 MiB" overhead="0 B"
+  time=2026-11-14T03:11:12.323+08:00 level=INFO source=llama_server.go:1406 msg="waiting for llama-server to become available" status="llm server error"
+  cmn  common_param:   - Vulkan0 : Radeon 7 (16182 MiB, 15373 MiB free)
+  common_memory_breakdown_print: |   - Vulkan0 (7)        | 16182 = 15372 + (2956 =  2368 +     512 +      76) +       -2146 |
+  llama_prepare_model_devices: using device Vulkan0 (Radeon 7) (unknown id) - 15373 MiB free
+  load_tensors: offloading output layer to GPU
+  load_tensors: offloading 31 repeating layers to GPU
+  load_tensors: offloaded 33/33 layers to GPU
+  load_tensors:      Vulkan0 model buffer size =  2368.57 MiB
+  llama_kv_cache:    Vulkan0 KV buffer size =   512.00 MiB
+  llama_kv_cache: size =  512.00 MiB (  4096 cells,  32 layers,  1/1 seqs), K (f16):  256.00 MiB, V (f16):  256.00 MiB
+  sched_reserve:    Vulkan0 compute buffer size =    76.01 MiB
+
+=== F Vulkan, both GPUs, OLLAMA_IGPU_ENABLE=1
+settings: CUDA_VISIBLE_DEVICES=-1 HIP_VISIBLE_DEVICES=-1 OLLAMA_IGPU_ENABLE=1
+result: 126 tokens | 21.2 tok/s | load 4.5 s | wall 10.7 s | in GPU memory: 100% of 6.41 GB
+server log lines kept: 16
+  time=2026-11-14T03:11:29.395+08:00 level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=Vulkan compute=0.0 name=Vulkan0 description="NVIDIA GeForce RTX 2060 SUPER" libdirs=ollama,vulkan driver=0.0 pci_id=0000:01:00.0 type=discrete total="8.0 GiB" available="7.3 GiB"
+  time=2026-11-14T03:11:29.395+08:00 level=INFO source=types.go:32 msg="inference compute" id=1 filter_id=1 library=Vulkan compute=0.0 name=Vulkan1 description="Radeon 7" libdirs=ollama,vulkan driver=0.0 pci_id="" type=iGPU total="15.8 GiB" available="15.0 GiB"
+  time=2026-11-14T03:11:30.124+08:00 level=INFO source=sched.go:1042 msg="selecting single GPU for llama-server model" main_gpu=0 id=1 filter_id=1 library=Vulkan name=Vulkan1 description="Radeon 7" integrated=true predicted="6.3 GiB" available="8.2 GiB"
+  time=2026-11-14T03:11:30.124+08:00 level=INFO source=sched.go:1161 msg="selecting GPU backend for llama-server model" library=Vulkan gpu_count=1 available_gpu_count=2
+  time=2026-11-14T03:11:30.131+08:00 level=INFO source=sched.go:658 msg="gpu memory" id=1 library=Vulkan available="14.6 GiB" free="15.0 GiB" minimum="457.0 MiB" overhead="0 B"
+  time=2026-11-14T03:11:30.132+08:00 level=INFO source=llama_server.go:1406 msg="waiting for llama-server to become available" status="llm server error"
+  cmn  common_param:   - Vulkan0 : Radeon 7 (16182 MiB, 15373 MiB free)
+  common_memory_breakdown_print: |   - Vulkan0 (7)        | 16182 = 15372 + (6568 =  2368 +    4096 +     104) +       -5758 |
+  llama_prepare_model_devices: using device Vulkan0 (Radeon 7) (unknown id) - 15373 MiB free
+  load_tensors: offloading output layer to GPU
+  load_tensors: offloading 31 repeating layers to GPU
+  load_tensors: offloaded 33/33 layers to GPU
+  load_tensors:      Vulkan0 model buffer size =  2368.57 MiB
+  llama_kv_cache:    Vulkan0 KV buffer size =  4096.00 MiB
+  llama_kv_cache: size = 4096.00 MiB ( 32768 cells,  32 layers,  1/1 seqs), K (f16): 2048.00 MiB, V (f16): 2048.00 MiB
+  sched_reserve:    Vulkan0 compute buffer size =   104.01 MiB
+
+=== done
